@@ -101,6 +101,7 @@ const App: React.FC = () => {
       isDark: true,
       tag: 'The International Standard',
       title: 'A New Era of Elite Global Competition',
+      subtitle: '',
       content:
         "Surf Cup International has redefined the global youth landscape, establishing a premier circuit that spans the most iconic footballing cultures. We provide the ultimate proving ground for the world's best academies.",
       stats: [
