@@ -55,7 +55,7 @@ const App = () => {
       subtitle: 'Representing Elite Talent from 31 Nations and 7 Continents',
       maps: [
         'https://d2cankni8sodj9.cloudfront.net/vNycsKBYGcB4slgo5Qp-ORqyZ-SlJYUKgTB_Jg.png',
-        'https://d2cankni8sodj9.cloudfront.net/iM-qBUCy-JuoHGx6kouHoldingsLeXvJdw0OpGPBI-PJA.png',
+        'https://d2cankni8sodj9.cloudfront.net/iM-qBUCy-JuoHGx6kouqLeXvJdw0OpGPBI-PJA.png',
         'https://d2cankni8sodj9.cloudfront.net/nrw3sYZtr2Xypv4VpPaHOFuUwr9VWSyJiTWptA.png',
         'https://d2cankni8sodj9.cloudfront.net/WiWKCXUm_M2p7bq2NYNmmzwRg9Bkgo4IyTHUdw.png',
         'https://d2cankni8sodj9.cloudfront.net/5zP8vG9iliwNIB4M286S4JahiBJY5BBJS7J90w.png',
