@@ -20,10 +20,74 @@ import {
  * SCI Presentation App - Optimized Executive Briefing
  */
 
-const App = () => {
+// --- TypeScript Interfaces to resolve Build Errors ---
+interface Stat {
+  label?: string;
+  value?: string;
+  kpi?: string;
+  start?: string;
+  current?: string;
+  unit?: string;
+  trend?: string;
+  icon?: React.ReactNode;
+}
+
+interface Milestone {
+  year: string;
+  label: string;
+  detail: string;
+  location: string;
+  logo?: string;
+}
+
+interface Hub {
+  name: string;
+  tag: string;
+  logo: string;
+  img: string;
+  desc: string;
+}
+
+interface Feature {
+  icon: React.ReactElement;
+  title: string;
+  desc: string;
+}
+
+interface Panel {
+  img: string;
+  size: string;
+}
+
+interface ImpactPoint {
+  icon: React.ReactNode;
+  label: string;
+  detail: string;
+}
+
+interface Slide {
+  type: string;
+  isDark: boolean;
+  title: string;
+  subtitle: string;
+  bgImage?: string;
+  image?: string;
+  tag?: string;
+  content?: string;
+  stats?: Stat[];
+  maps?: string[];
+  impactPoints?: ImpactPoint[];
+  hubs?: Hub[];
+  milestones?: Milestone[];
+  features?: Feature[];
+  panels?: Panel[];
+  testimonialImages?: string[];
+}
+
+const App: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
+  const slides: Slide[] = [
     {
       type: 'hero',
       isDark: true,
@@ -43,7 +107,7 @@ const App = () => {
       stats: [
         { label: 'International Hubs', value: '3+' },
         { label: 'Nations Represented', value: '31+' },
-        { label: 'Annual Teams', value: '300+' },
+        { label: 'Annual Teams', value: '280+' },
       ],
       image:
         'https://d2cankni8sodj9.cloudfront.net/sJ2ico9HoLvZyURlW2texiKSsRYG4ubBSthiVA.png',
@@ -72,25 +136,25 @@ const App = () => {
         {
           kpi: 'Global Team Volume',
           start: '48 Teams',
-          current: '300+',
+          current: '280+',
           unit: 'Teams',
-          trend: '+525%',
+          trend: '+483%',
           icon: <Trophy className="w-6 h-6" />,
         },
         {
           kpi: 'International Players',
           start: '1,500',
-          current: '5,000+',
+          current: '4,200+',
           unit: 'Athletes',
-          trend: '+233%',
+          trend: '+180%',
           icon: <Users className="w-6 h-6" />,
         },
         {
           kpi: 'Annual Travelers',
           start: '2,000+',
-          current: '7,500+',
+          current: '6,900+',
           unit: 'Visitors',
-          trend: '+275%',
+          trend: '+245%',
           icon: <Plane className="w-6 h-6" />,
         },
         {
@@ -175,6 +239,7 @@ const App = () => {
           label: 'Salou Inaugural',
           detail: '48 Teams',
           location: 'Spain',
+          logo: 'https://d2cankni8sodj9.cloudfront.net/l16vvxxC6h35XXRyk5e8FmdFFqyEn9GsBRclEA.png',
         },
         {
           year: '2022',
@@ -187,12 +252,14 @@ const App = () => {
           label: 'Rome Prestige',
           detail: '150 Teams',
           location: 'Italy',
+          logo: 'https://d2cankni8sodj9.cloudfront.net/X6V4FXl0lGeALx0741FWyotsGvv1HFrErQG19w.png',
         },
         {
           year: '2024',
           label: 'Tangier Milestone',
           detail: '210 Teams',
           location: 'Morocco',
+          logo: 'https://d2cankni8sodj9.cloudfront.net/kob7FjatUk5Fy9D8XwIcz9Tdo2fnDuiTkJlhJw.png',
         },
         {
           year: '2025',
@@ -287,7 +354,7 @@ const App = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();
     };
@@ -295,7 +362,7 @@ const App = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const renderSlide = (slide) => {
+  const renderSlide = (slide: Slide) => {
     switch (slide.type) {
       case 'hero':
         return (
@@ -346,7 +413,7 @@ const App = () => {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                {slide.testimonialImages?.map((img, i) => (
+                {slide.testimonialImages?.map((img: string, i: number) => (
                   <div key={i} className="group relative z-10 hover:z-50">
                     <div className="absolute -inset-4 bg-gradient-to-b from-[#11CAA0] to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-500 rounded-[2.5rem] blur-2xl" />
                     <div className="relative bg-white/5 border border-white/20 backdrop-blur-3xl rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-500 transform group-hover:scale-110 group-hover:bg-white/20 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
@@ -379,7 +446,7 @@ const App = () => {
               </div>
               <div className="flex flex-col gap-6">
                 <div className="grid grid-cols-3 gap-6">
-                  {slide.maps?.slice(0, 3).map((map, i) => (
+                  {slide.maps?.slice(0, 3).map((map: string, i: number) => (
                     <div
                       key={i}
                       className="group relative bg-white/5 border border-white/20 backdrop-blur-xl rounded-[1.5rem] overflow-hidden shadow-2xl transition-all duration-500 hover:border-[#11CAA0]/50 hover:bg-white/10"
@@ -393,7 +460,7 @@ const App = () => {
                   ))}
                 </div>
                 <div className="grid grid-cols-2 gap-6 max-w-[66%] mx-auto w-full">
-                  {slide.maps?.slice(3, 5).map((map, i) => (
+                  {slide.maps?.slice(3, 5).map((map: string, i: number) => (
                     <div
                       key={i}
                       className="group relative bg-white/5 border border-white/20 backdrop-blur-xl rounded-[1.5rem] overflow-hidden shadow-2xl transition-all duration-500 hover:border-[#11CAA0]/50 hover:bg-white/10"
@@ -431,7 +498,7 @@ const App = () => {
                 {slide.content}
               </p>
               <div className="flex gap-16">
-                {slide.stats?.map((s, i) => (
+                {slide.stats?.map((s: Stat, i: number) => (
                   <div key={i} className="group">
                     <div className="text-5xl font-black text-[#11CAA0] group-hover:scale-110 transition-transform cursor-default">
                       {s.value}
@@ -466,11 +533,20 @@ const App = () => {
               </div>
               <div className="relative flex items-center justify-between px-12 mt-12 gap-12">
                 <div className="absolute top-1/2 left-0 right-0 h-1 bg-white/10 -translate-y-1/2 z-0" />
-                {slide.milestones?.map((m, i) => (
+                {slide.milestones?.map((m: Milestone, i: number) => (
                   <div
                     key={i}
                     className="relative z-10 flex flex-col items-center group flex-1"
                   >
+                    <div className="absolute -top-24 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-110">
+                      {m.logo && (
+                        <img
+                          src={m.logo}
+                          className="h-16 w-auto brightness-0 invert opacity-60"
+                          alt="logo"
+                        />
+                      )}
+                    </div>
                     <div
                       className={`text-5xl font-black mb-6 transition-all duration-300 group-hover:scale-110 ${
                         i === (slide.milestones?.length ?? 0) - 1
@@ -518,7 +594,7 @@ const App = () => {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                {slide.stats?.map((s, i) => (
+                {slide.stats?.map((s: Stat, i: number) => (
                   <div key={i} className="group relative">
                     <div className="relative px-10 py-12 bg-white/5 border border-white/20 backdrop-blur-xl rounded-[2.5rem] flex flex-col items-center text-center hover:-translate-y-4 transition-all duration-500 shadow-2xl">
                       <div className="mb-8 p-5 bg-[#11CAA0]/10 rounded-2xl text-[#11CAA0]">
@@ -579,7 +655,7 @@ const App = () => {
                 {slide.content}
               </p>
               <div className="grid grid-cols-3 gap-10">
-                {slide.impactPoints?.map((p, i) => (
+                {slide.impactPoints?.map((p: ImpactPoint, i: number) => (
                   <div
                     key={i}
                     className="bg-white/5 border border-white/20 p-10 rounded-[2rem] backdrop-blur-xl group hover:bg-white/10 transition-all text-center"
@@ -603,7 +679,7 @@ const App = () => {
       case 'hubs-badges':
         return (
           <div className="h-full bg-[#001A2D] flex relative overflow-hidden pt-40">
-            {slide.hubs?.map((hub, i) => (
+            {slide.hubs?.map((hub: Hub, i: number) => (
               <div
                 key={i}
                 className="relative flex-1 group overflow-hidden border-r border-white/10 last:border-r-0"
@@ -673,13 +749,13 @@ const App = () => {
                 </p>
               </div>
               <div className="lg:col-span-2 grid grid-cols-2 gap-6 lg:gap-8">
-                {slide.features?.map((f, i) => (
+                {slide.features?.map((f: Feature, i: number) => (
                   <div
                     key={i}
                     className="bg-white/5 border border-white/20 backdrop-blur-xl p-8 rounded-[2rem] flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500 shadow-xl"
                   >
                     <div className="mb-6 text-[#11CAA0] group-hover:scale-110 transition-transform duration-500">
-                      {f.icon}
+                      {React.cloneElement(f.icon, { className: 'w-10 h-10' })}
                     </div>
                     <h4 className="text-white font-black uppercase text-[10px] tracking-[0.2em] mb-4">
                       {f.title}
@@ -706,7 +782,7 @@ const App = () => {
               </p>
             </div>
             <div className="flex-grow grid grid-cols-4 grid-rows-2 gap-6 p-16 pt-0">
-              {slide.panels?.map((p, i) => (
+              {slide.panels?.map((p: Panel, i: number) => (
                 <div
                   key={i}
                   className={`relative group overflow-hidden rounded-[2.5rem] bg-[#001A2D]/40 shadow-inner ${
@@ -731,16 +807,14 @@ const App = () => {
 
   return (
     <div className="h-screen w-screen bg-[#001A2D] text-slate-900 font-sans select-none overflow-hidden relative">
-      {/* Absolute Branding Layer */}
-      <div className="absolute top-12 left-12 z-[100]">
-        <img
-          src="https://surfcupinternational.com/wp-content/uploads/2020/12/cropped-Surf-Cup-International-Blue.png"
-          className={`h-16 w-auto transition-all duration-500 ${
-            slides[currentSlide].isDark ? 'brightness-0 invert' : ''
-          }`}
-          alt="SCI Logo"
-        />
-      </div>
+     {/* Absolute Branding Layer */}
+<div className="absolute top-12 left-12 z-[100]">
+  <img
+    src="https://d2cankni8sodj9.cloudfront.net/RhD41dw0xQJI0YRJqyqpYmqNMtDtUt_J9pxDNg.png"
+    className="h-16 w-auto transition-all duration-500"
+    alt="SCI Logo"
+  />
+</div>
 
       {/* Main Slide Content */}
       <div className="h-full transition-all duration-700 ease-in-out">
